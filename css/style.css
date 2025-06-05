@@ -1,11 +1,40 @@
-body {
-  font-family: Arial, sans-serif;
+/* ===========================================
+   1. Reset & Global Styles
+=========================================== */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
   background-color: #ffffff;
   color: #111111;
 }
 
+/* ===========================================
+   2. Skip Link Style
+=========================================== */
+.skip-link {
+  position: absolute;
+  top: -40px;          /* ẩn lên trên khi chưa focus */
+  left: 0;
+  background: #004b8d;  /* màu nền đậm */
+  color: #ffffff;
+  padding: 8px 16px;
+  z-index: 100;
+  text-decoration: none;
+  font-weight: bold;
+}
+.skip-link:focus {
+  top: 0;  /* Khi focus (tab), đưa link xuống vị trí nhìn thấy */
+}
+
+/* ===========================================
+   3. Header, Nav, Footer
+=========================================== */
 header {
   background-color: #004b8d;
   color: #ffffff;
@@ -13,51 +42,186 @@ header {
   text-align: center;
 }
 
-nav {
-  background-color: #e0e0e0;
-  padding: 10px;
+/* Bước 4: Style cho <nav class="main-nav"> */
+.main-nav {
+  display: inline-block;      /* inline-block để width:80% tự canh trung */
+  width: 80%;
+  margin: 0 auto 16px;        /* canh giữa ngang (auto) và margin-bottom 16px */
+  background-color: #f2f2f2;  /* nền nhạt */
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-align: center;         /* canh giữa text (nếu ul không full width) */
 }
 
-nav ul {
-  list-style-type: none;
+/* 3.1. Bỏ dấu chấm (bullet) mặc định và hiển thị theo flex */
+.main-nav ul {
+  list-style-type: none; 
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding: 0;
+  justify-content: space-around; /* chia đều khoảng cách giữa các <li> */
+  align-items: center;
   margin: 0;
+  padding: 0;
 }
 
-nav a {
+.main-nav li {
+  margin: 0 12px; /* khoảng đệm trái phải giữa các menu item */
+}
+
+.main-nav a {
   text-decoration: none;
-  color: #000000;
-  font-weight: bold;
+  color: #333333;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.main-nav a:hover,
+.main-nav a:focus {
+  color: #0066cc;
+  outline: none;
 }
 
-h1 {
-  font-family: Georgia, serif;
-  font-size: 2.5rem;
-  color: #ffffff;
+/* Bước 5: chỉ style cho ảnh con trong nav (nếu có dùng ảnh logo bên trong .main-nav) */
+.main-nav img {
+  width: 10%;
+  height: auto;
+  display: block;
+  margin: 0 auto 8px;
+}
+
+/* ===========================================
+   4. Main Content Section
+=========================================== */
+main {
+  padding: 16px;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* ===========================================
+   5. Grid Layout (Bước 6, 7, 8)
+=========================================== */
+.grid {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  column-gap: 4%;   /* 4% khoảng trống giữa hai cột */
+  row-gap: 24px;    /* 24px khoảng trống giữa các hàng */
+  justify-content: space-between; /* căn đều 2 cột trong 80% width */
+  align-items: start; /* mỗi grid-item căn lên đầu ô */
+  margin: 24px auto;   /* canh giữa container */
+  max-width: 90%;
+}
+
+.grid-item {
+  background: #fafafa;
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* căn nội dung con lên đầu */
+  align-items: center;          /* căn giữa ngang trong ô */
+}
+
+.grid-item img {
+  width: 100%; /* 100% ô .grid-item (Bước 7) */
+  height: auto;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Phần title/mô tả trong grid-item (nếu có) */
+.grid-item h3 {
+  margin: 8px 0 4px;
+  font-size: 1.1rem;
+  color: #333333;
+}
+.grid-item p {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #555555;
+}
+
+/* ===========================================
+   6. Flex Layout (Bước 9) – dùng chung nếu cần dùng flex
+=========================================== */
+.flex {
+  display: flex;
+  flex-wrap: wrap;          /* cho phép wrap xuống hàng mới */
+  justify-content: space-between; /* giãn đều khoảng giữa */
+  align-items: center;      /* căn các phần tử con dọc ở giữa */
+  gap: 16px;                /* khoảng cách giữa các item */
+  margin: 24px auto;
+  max-width: 90%;
+}
+
+.flex-item {
+  flex: 0 1 22%;  /* mỗi item cố gắng chiếm ~22% width container, co dãn khi cần */
+  background: #f7f7f7;
+  padding: 12px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
   text-align: center;
 }
 
-main {
-  padding: 20px;
-  background-color: #f9f9f9;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #111111;
+.flex-item img {
+  width: 80%;
+  height: auto;
+  margin-bottom: 8px;
+}
+.flex-item p {
+  font-size: 0.95rem;
+  color: #333333;
 }
 
+/* ===========================================
+   7. Footer
+=========================================== */
 footer {
   background-color: #222222;
   color: #ffffff;
   padding: 15px;
   text-align: center;
+  font-size: 0.9rem;
 }
 
-img {
-  display: block;
-  margin: 10px auto;
-  max-width: 100%;
-  height: auto;
+/* ===========================================
+   8. Các style bổ sung (có thể tùy chỉnh thêm)
+=========================================== */
+/* Link mặc định */
+a {
+  color: #0066cc;
+}
+a:hover {
+  color: #004b8d;
+}
+
+/* Heading */
+h1, h2, h3 {
+  color: #004b8d;
+  margin-bottom: 12px;
+}
+
+/* Các đoạn văn */
+p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Media Queries (nếu muốn responsive) */
+@media (max-width: 768px) {
+  /* Khi màn hình nhỏ hơn 768px, chuyển grid thành 1 cột */
+  .grid {
+    grid-template-columns: 100%;
+    column-gap: 0;
+  }
+  /* Flex item chiếm 48% để 2 item/1 hàng khi đủ chỗ */
+  .flex-item {
+    flex: 0 1 48%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Màn hình siêu nhỏ, một hàng 1 cột */
+  .flex-item {
+    flex: 0 1 100%;
+  }
 }
